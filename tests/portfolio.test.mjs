@@ -82,3 +82,10 @@ test('the homepage presents the owner name as a prominent signature', async () =
   assert.match(styles, /\.hero-signature__name[^}]*font-size: 24px/);
   assert.match(styles, /@media \(max-width: 820px\)[\s\S]*\.hero-signature__name[^}]*font-size: 18px/);
 });
+
+test('the GitHub Pages base path ends with a slash before public assets', async () => {
+  const config = await read('astro.config.mjs');
+
+  assert.match(config, /`\/\$\{repo\}\/`/);
+  assert.doesNotMatch(config, /`\/\$\{repo\}`/);
+});
