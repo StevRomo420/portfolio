@@ -14,6 +14,8 @@ const projects = defineCollection({
     stack: z.array(z.string()),
     summary: z.string(),
     outcome: z.string().optional(),
+    architectureImage: z.string().optional(),
+    architectureCaption: z.string().optional(),
   }),
 });
 

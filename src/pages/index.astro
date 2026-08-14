@@ -141,12 +141,10 @@ const operations = [
             <p class="featured-project__subtitle">{featured.data.subtitle}</p>
             <p>{featured.data.summary}</p>
             <div class="module-grid">{featured.data.stack.map((item) => <span>{item}</span>)}</div>
-            <div class="project-system" aria-label="Wild Boar architecture overview">
-              <div><span>01 / COLLECT</span><strong>Security telemetry</strong></div>
-              <i>→</i>
-              <div><span>02 / CORRELATE</span><strong>Detection engine</strong></div>
-              <i>→</i>
-              <div><span>03 / RESPOND</span><strong>Actionable findings</strong></div>
+            <div class="wild-boar-teaser" aria-hidden="true">
+              <div class="wild-boar-teaser__core"><strong>WILD BOAR</strong><span>Security operations workspace</span></div>
+              <div class="wild-boar-teaser__flow"><span>SECURITY WORK</span><i>→</i><strong>GOVERN · OPERATE · EVIDENCE</strong></div>
+              <small>FULL SYSTEM VIEW INSIDE</small>
             </div>
             <div class="open-link">OPEN PROJECT <span>→</span></div>
           </a>

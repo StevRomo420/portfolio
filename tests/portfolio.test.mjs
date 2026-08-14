@@ -89,3 +89,25 @@ test('the GitHub Pages base path ends with a slash before public assets', async 
   assert.match(config, /`\/\$\{repo\}\/`/);
   assert.doesNotMatch(config, /`\/\$\{repo\}`/);
 });
+
+test('the Proxmox project is classified as sanitized production infrastructure', async () => {
+  const project = await read('src/content/projects/proxmox-backup-lab.md');
+  const template = await read('src/pages/projects/[id].astro');
+
+  assert.match(project, /code: PROD-002/);
+  assert.match(project, /title: Proxmox Backup Infrastructure/);
+  assert.match(project, /status: IN PRODUCTION/);
+  assert.match(project, /architectureImage: \/images\/proxmox-backup-production-architecture\.png/);
+  assert.match(template, /class="project-architecture"/);
+});
+
+test('the featured Wild Boar card teases the system without rendering the full diagram', async () => {
+  const project = await read('src/content/projects/wild-boar.md');
+  const homepage = await read('src/pages/index.astro');
+
+  assert.match(project, /architectureImage: \/images\/wild-boar-system-overview\.png/);
+  assert.match(homepage, /class="wild-boar-teaser"/);
+  assert.match(homepage, /SECURITY WORK[\s\S]*GOVERN · OPERATE · EVIDENCE/);
+  assert.doesNotMatch(homepage, /featured\.data\.architectureImage/);
+  assert.doesNotMatch(homepage, /01 \/ COLLECT[\s\S]*02 \/ CORRELATE[\s\S]*03 \/ RESPOND/);
+});

@@ -1,12 +1,18 @@
 ---
 order: 2
-code: LAB-002
-title: Proxmox Backup Lab
-subtitle: Virtualization / Backup & Recovery
-status: ACTIVE LAB
+code: PROD-002
+title: Proxmox Backup Infrastructure
+subtitle: Production Virtualization / Backup & Recovery
+status: IN PRODUCTION
 featured: false
 stack: [Proxmox VE, Windows Server, NFS, vzdump]
-summary: Self-hosted virtualization lab using a Windows Server NFS backup target, including UID/GID mapping, stale-mount recovery and throughput tuning.
+summary: Production backup infrastructure connecting Proxmox VE workloads to a protected Windows Server NFS repository, engineered for reliable operation and recoverability.
+architectureImage: /images/proxmox-backup-production-architecture.png
+architectureCaption: SANITIZED PRODUCTION VIEW / SENSITIVE CONFIGURATION OMITTED
 ---
 
-A practical backup and recovery lab focused on the operational edge cases that show up after the happy-path setup is complete.
+This production implementation provides a controlled backup path for virtual workloads and addresses the operational conditions that appear beyond initial setup: identity mapping, mount recovery, transfer reliability and recovery verification.
+
+Recovery is initiated from Proxmox by selecting an available backup stored in the Windows Server NFS repository. The virtual machine is restored in Proxmox and then validated for successful boot and expected service availability.
+
+The architecture shown here is intentionally simplified. Host identifiers, network topology, storage paths, capacity, schedules, retention policies and configuration values are omitted to protect the organization.

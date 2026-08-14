@@ -1,14 +1,16 @@
 ---
 order: 1
-code: LAB-001
+code: SYS-001
 title: Wild Boar
 subtitle: Security Operations Platform
 status: IN DEVELOPMENT
 featured: true
-stack: [Incidents, Risks, Audits, Log Explorer, Detections, PDF Reporting]
-summary: Personal security operations platform consolidating incident, risk and audit tracking with log exploration, automated detections and executive reporting.
+stack: [Django 6, PostgreSQL, Incidents, Audits, Risks, Pentest, Log Explorer, Reporting]
+summary: Single-organization security operations platform connecting incident response, audits, risk management, pentesting and security data in one governed workspace.
+architectureImage: /images/wild-boar-system-overview.png
+architectureCaption: SYSTEM OVERVIEW / IMPLEMENTATION DETAILS CONDENSED
 ---
 
-Wild Boar is being designed as a compact internal security-operations workspace rather than another generic dashboard.
+Wild Boar is designed for small-to-medium security teams that need one deployable workspace without the operational weight of a distributed platform.
 
-The current product direction consolidates incident management, risk tracking and audit evidence while keeping operational telemetry close to the workflows that act on it.
+Its domain modules share role-based access, licence-aware feature controls, SLA tracking, escalation, notifications, protected evidence and an append-only activity trail. The application produces operational dashboards and PDF/Excel reports through a server-rendered Django interface.
