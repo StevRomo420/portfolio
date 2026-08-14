@@ -25,6 +25,32 @@ test('the portfolio contains no placeholder copy or broken UTF-8 sequences', asy
   assert.doesNotMatch(source, /Ã|Â|â€|â†|âˆ/);
 });
 
+test('project copy describes the work without disclosure boilerplate', async () => {
+  const source = (await Promise.all([
+    read('src/pages/projects/[id].astro'),
+    read('src/pages/research/agent-tesla-fileless.astro'),
+    read('src/content/projects/cyber-risk-assurance.md'),
+    read('src/content/projects/infrastructure-security-assessments.md'),
+    read('src/content/projects/proxmox-backup-lab.md'),
+    read('src/content/projects/windows-ir-toolkit.md'),
+    read('public/images/agent-tesla-execution-analysis.svg'),
+    read('public/images/agent-tesla-execution-analysis-mobile.svg'),
+    read('public/images/cyber-risk-assurance-lifecycle.svg'),
+    read('public/images/cyber-risk-assurance-lifecycle-mobile.svg'),
+    read('public/images/incident-response-triage-workflow.svg'),
+    read('public/images/infrastructure-security-assessment-workflow.svg'),
+    read('public/images/infrastructure-security-assessment-workflow-mobile.svg'),
+    read('public/images/nist-aligned-incident-response-plan.svg'),
+    read('public/images/nist-aligned-incident-response-plan-mobile.svg'),
+    read('public/images/proxmox-backup-production-architecture.svg'),
+    read('public/images/proxmox-backup-production-architecture-mobile.svg'),
+    read('public/images/wazuh-detection-lifecycle.svg'),
+    read('public/images/wazuh-detection-lifecycle-mobile.svg'),
+  ])).join('\n');
+
+  assert.doesNotMatch(source, /sanitized|omitted|public (?:version|case|description|view)|deliberately omits|leav(?:es|ing) out|\bexcludes\b/i);
+});
+
 test('interactive elements expose visible keyboard focus styles', async () => {
   const styles = await read('src/styles/global.css');
   assert.match(styles, /:focus-visible/);
@@ -97,7 +123,7 @@ test('GitHub Pages builds with the verified Node LTS runtime', async () => {
   assert.doesNotMatch(workflow, /node-version: 24/);
 });
 
-test('the Proxmox project is classified as sanitized production infrastructure', async () => {
+test('the Proxmox project is classified as production infrastructure', async () => {
   const project = await read('src/content/projects/proxmox-backup-lab.md');
   const template = await read('src/pages/projects/[id].astro');
   const diagram = await read('public/images/proxmox-backup-production-architecture.svg');
@@ -184,7 +210,7 @@ test('portfolio copy uses direct practitioner language instead of generic market
   assert.doesNotMatch(source, /one governed workspace|defensible evidence|provides a controlled backup path|evidence-led technical workflow/);
 });
 
-test('risk assurance and infrastructure assessment experience are published as sanitized projects', async () => {
+test('risk assurance and infrastructure assessment experience are published as professional projects', async () => {
   const risk = await read('src/content/projects/cyber-risk-assurance.md');
   const assessment = await read('src/content/projects/infrastructure-security-assessments.md');
   const homepage = await read('src/pages/index.astro');

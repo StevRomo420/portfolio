@@ -9,7 +9,7 @@ stack: [Proxmox VE, Windows Server, NFS, vzdump]
 summary: I built this production backup path to store Proxmox VM backups on a Windows Server NFS repository and make restores easy to verify.
 architectureImage: /images/proxmox-backup-production-architecture.svg
 architectureMobileImage: /images/proxmox-backup-production-architecture-mobile.svg
-architectureCaption: SANITIZED PRODUCTION VIEW / SENSITIVE CONFIGURATION OMITTED
+architectureCaption: BACKUP AND RECOVERY ARCHITECTURE
 ---
 
 I built and maintain this backup setup for virtual machines running in production. The work went beyond mounting an NFS share: I had to account for identity mapping, failed mounts, transfer reliability and restore testing.

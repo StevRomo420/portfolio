@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1320" role="img" aria-labelledby="title desc">
-  <title id="title">Proxmox production backup and recovery architecture for mobile</title><desc id="desc">Vertical sanitized backup and restore flow.</desc>
+  <title id="title">Proxmox production backup and recovery architecture for mobile</title><desc id="desc">Vertical backup and restore flow.</desc>
   <defs><style>.b{fill:#07100d}.p{fill:#0a1511;stroke:#294238;stroke-width:2}.a{fill:#10291e;stroke:#72d69b;stroke-width:2}.q{fill:#1d180d;stroke:#e6ad4c;stroke-width:2}.r{stroke:#294238;stroke-width:2}.m{fill:#8fa99e}.w{fill:#edf5f1}.g{fill:#72d69b}.o{fill:#e6ad4c}.l{font:500 17px ui-monospace,monospace;letter-spacing:1.5px}.t{font:600 25px Arial,sans-serif}.c{font:400 18px Arial,sans-serif}.s{font:500 14px ui-monospace,monospace;letter-spacing:1px}</style></defs>
   <rect class="b" width="720" height="1320"/><text x="42" y="58" class="l g">PROD-002 / BACKUP &amp; RECOVERY</text><text x="42" y="102" class="t w">Proxmox data protection</text><line x1="42" y1="132" x2="678" y2="132" class="r"/>
   <text x="42" y="178" class="l g">BACKUP FLOW</text>
@@ -10,5 +10,5 @@
   <g transform="translate(42 866)"><rect class="q" width="636" height="92"/><text x="24" y="36" class="l o">01 / SELECT</text><text x="210" y="36" class="t w">RECOVERY POINT</text><text x="210" y="68" class="c m">Available backup in Proxmox</text></g>
   <g transform="translate(42 978)"><rect class="q" width="636" height="92"/><text x="24" y="36" class="l o">02 / RESTORE</text><text x="210" y="36" class="t w">VIRTUAL MACHINE</text><text x="210" y="68" class="c m">Returned to Proxmox VE</text></g>
   <g transform="translate(42 1090)"><rect class="q" width="636" height="92"/><text x="24" y="36" class="l o">03 / VERIFY</text><text x="210" y="36" class="t w">BOOT + SERVICES</text><text x="210" y="68" class="c m">Recovery validation</text></g>
-  <rect x="42" y="1210" width="636" height="58" class="p"/><text x="66" y="1246" class="l o">RECOVERY VALIDATED BEFORE RETURN TO SERVICE</text><text x="42" y="1306" class="s m">SANITIZED / SENSITIVE CONFIGURATION OMITTED</text>
+  <rect x="42" y="1210" width="636" height="58" class="p"/><text x="66" y="1246" class="l o">RECOVERY VALIDATED BEFORE RETURN TO SERVICE</text><text x="42" y="1306" class="s m">BACKUP / VALIDATION / RECOVERY</text>
 </svg>

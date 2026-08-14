@@ -29,7 +29,7 @@ const base = import.meta.env.BASE_URL;
         <figure class="project-architecture">
           <picture>
             {project.data.architectureMobileImage && <source media="(max-width: 620px)" srcset={`${base}${project.data.architectureMobileImage.replace(/^\//, '')}`} />}
-            <img src={`${base}${project.data.architectureImage.replace(/^\//, '')}`} alt={`Sanitized production architecture for ${project.data.title}`} loading="eager" />
+            <img src={`${base}${project.data.architectureImage.replace(/^\//, '')}`} alt={`Architecture diagram for ${project.data.title}`} loading="eager" />
           </picture>
           {project.data.architectureCaption && <figcaption>{project.data.architectureCaption}</figcaption>}
         </figure>
@@ -44,10 +44,6 @@ const base = import.meta.env.BASE_URL;
         </figure>
       )}
       <div class="project-prose"><Content /></div>
-      <div class="redaction-note">
-        <span>DISCLOSURE POLICY</span>
-        Production identifiers, exact network topology, credentials and sensitive detection logic are intentionally omitted.
-      </div>
     </article>
   </main>
 </BaseLayout>
