@@ -9,6 +9,7 @@ test('the homepage leads with evidence and has a distinctive signal path', async
 
   assert.match(homepage, /class="proof-strip"/);
   assert.match(homepage, /class="signal-path"/);
+  assert.match(homepage, /I protect critical infrastructure through <em>security testing, detection, response and hardening\.<\/em>/);
   assert.match(homepage, /PROBLEM[\s\S]*INTERVENTION[\s\S]*OUTCOME/);
 });
 
