@@ -1,0 +1,39 @@
+---
+const nav = [
+  ['01', 'Overview', 'overview'],
+  ['02', 'Operations', 'operations'],
+  ['03', 'Case Files', 'cases'],
+  ['04', 'Labs', 'labs'],
+  ['05', 'Experience', 'experience'],
+  ['06', 'Credentials', 'credentials'],
+];
+const base = import.meta.env.BASE_URL;
+---
+<aside class="sidebar">
+  <div class="sidebar__inner">
+    <a class="brand brand-lockup" href={`${base}#overview`} aria-label="Esteban Rosales home">
+      <span class="identity-name">ESTEBAN ROSALES</span>
+      <small>SECURITY ENGINEER</small>
+    </a>
+    <p class="sidebar__caption">PORTFOLIO SYSTEM</p>
+
+    <nav class="side-nav" aria-label="Portfolio sections">
+      {nav.map(([num, label, id]) => (
+        <a data-nav href={`#${id}`}>
+          <span>{num}</span><strong>{label}</strong>
+        </a>
+      ))}
+    </nav>
+
+    <div class="sidebar__meta">
+      <a href="mailto:esteban5420978@hotmail.com">EMAIL <span>→</span></a>
+      <a href="https://www.linkedin.com/in/esteban-rosales" target="_blank" rel="noreferrer">LINKEDIN <span>↗</span></a>
+      <a href={`${base}cv.pdf`} target="_blank">CV <span>↓</span></a>
+    </div>
+  </div>
+</aside>
+
+<header class="mobile-header">
+  <a class="brand identity-name" href={`${base}#overview`}>ESTEBAN ROSALES</a>
+  <a class="mobile-header__cv" href={`${base}cv.pdf`} target="_blank">CV ↓</a>
+</header>

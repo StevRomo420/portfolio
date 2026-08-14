@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Esteban Rosales — Security Engineer',
+  description = 'Security engineering portfolio: detection engineering, incident response, infrastructure security and automation.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#090d0c" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+
+      const sections = [...document.querySelectorAll('main section[id]')];
+      const links = [...document.querySelectorAll('[data-nav]')];
+      const setActive = () => {
+        const y = window.scrollY + 180;
+        let current = sections[0]?.id;
+        for (const section of sections) if (section.offsetTop <= y) current = section.id;
+        links.forEach((link) => link.toggleAttribute('data-active', link.getAttribute('href') === `#${current}`));
+      };
+      setActive();
+      window.addEventListener('scroll', setActive, { passive: true });
+    </script>
+  </body>
+</html>

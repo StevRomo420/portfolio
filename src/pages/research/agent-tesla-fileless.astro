@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+const linkedInUrl = 'https://www.linkedin.com/posts/esteban-rosales_an%C3%A1lisis-de-cadena-de-ejecuci%C3%B3n-fileless-activity-7408997182692892673-OQPb?utm_source=share&utm_medium=member_desktop&rcm=ACoAADsu3HgBNhvykLyY0jMv3TNlfI2A-BGnCls';
+const iocs = [
+  ['Initial script', '940c1b694e0a211b11a9e4a71e03a713550da5a7'],
+  ['Secondary script', 'e975f9ca9f50b50f04b4ce174734cb13a111e6b6'],
+  ['Final payload', '576006af4b33c4c894087510248eb5512019dcca'],
+  ['Binary', '2e6a3a9ab81ecf480411ee70396fc361c1931654'],
+];
+---
+<BaseLayout title="Agent Tesla Fileless Execution Analysis — Esteban Rosales" description="Reverse engineering case study tracing a staged Agent Tesla fileless execution chain through PowerShell, RC4 and in-memory .NET loading.">
+  <main class="research-page">
+    <a class="project-back" href={`${base}#cases`}><span>← CASE FILES</span><strong class="identity-name">ESTEBAN ROSALES</strong></a>
+    <article class="research-record" data-reveal>
+      <header class="research-hero">
+        <div class="eyebrow">CASE-004 / MALWARE RESEARCH</div>
+        <div class="research-hero__meta">
+          <span>2025.12.22</span><span>REVERSE ENGINEERING</span><span>AGENT TESLA</span>
+        </div>
+        <h1>Tracing a staged fileless execution chain from obfuscated PowerShell to an in-memory .NET payload.</h1>
+        <p>The analysis follows a multi-stage loader that decodes Base64 content, decrypts it with RC4, executes PowerShell dynamically in memory and loads an embedded PE through the .NET runtime.</p>
+        <a class="button button--primary" href={linkedInUrl} target="_blank" rel="noreferrer">VIEW ORIGINAL LINKEDIN POST <span>↗</span></a>
+      </header>
+
+      <section class="research-section">
+        <div class="eyebrow">EXECUTION CHAIN</div>
+        <div class="research-flow">
+          <div class="node"><span>STAGE 01</span><strong>Initial obfuscated script</strong><small>Embedded Base64 content and cleanup behavior.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="node node--accent"><span>STAGE 02</span><strong>RC4 + PowerShell</strong><small>Decode, decrypt and recover the next-stage script.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="node"><span>STAGE 03</span><strong>In-memory .NET loader</strong><small>Assembly.Load, Reflection and process-conditioned execution.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="node"><span>PAYLOAD</span><strong>Embedded PE</strong><small>Recovered for static analysis without executing the final payload.</small></div>
+        </div>
+      </section>
+
+      <section class="research-section research-grid">
+        <div>
+          <div class="eyebrow">KEY FINDINGS</div>
+          <ul class="research-list">
+            <li>The execution chain is staged and designed to minimize persistent artifacts on disk.</li>
+            <li>The second stage performs Base64 decoding and RC4 decryption before dynamic PowerShell execution.</li>
+            <li>The final loader reconstructs a PE/.NET assembly and loads it directly through <code>System.Reflection.Assembly.Load</code>.</li>
+            <li>Reflection is used to locate and invoke methods from the loaded assembly.</li>
+            <li>A continuous process-monitoring loop gates payload execution based on the host environment.</li>
+          </ul>
+        </div>
+        <aside class="research-evidence">
+          <div class="eyebrow">STATIC EVIDENCE</div>
+          <strong>PE32 / .NET</strong>
+          <p>Recovered binary showed the expected MZ and PE signatures and was identified as a Windows PE32 Mono/.NET assembly.</p>
+          <p>String inspection exposed references to browsers, email clients, profile locations and password-related data consistent with information-stealing functionality.</p>
+        </aside>
+      </section>
+
+      <section class="research-section">
+        <div class="eyebrow">INDICATORS / SHA1</div>
+        <div class="ioc-table">
+          {iocs.map(([label, hash]) => <div><span>{label}</span><code>{hash}</code></div>)}
+        </div>
+      </section>
+
+      <section class="research-section research-note">
+        <div class="eyebrow">PORTFOLIO NOTE</div>
+        <p>This case study is a condensed presentation of the original malware-analysis report. It emphasizes investigative methodology, execution-chain reconstruction and defensible evidence rather than reproducing every payload detail.</p>
+      </section>
+    </article>
+  </main>
+</BaseLayout>

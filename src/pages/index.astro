@@ -1,0 +1,199 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+
+const base = import.meta.env.BASE_URL;
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.find((p) => p.data.featured);
+const secondary = projects.filter((p) => !p.data.featured);
+
+const proofs = [
+  ['−60%', 'LESS ALERT NOISE', 'Wazuh detection tuning'],
+  ['>90%', 'FASTER DEPLOYMENT', 'Ansible security baselines'],
+  ['55→5.8%', 'CRACKABLE CREDENTIALS', 'Assessment through validation'],
+];
+
+const operations = [
+  ['OPS-01', 'Detection Engineering', ['Wazuh SIEM', 'Log analysis', 'Alert triage', 'Custom detection', 'Malware analysis']],
+  ['OPS-02', 'Incident Response', ['NIST 800-61', 'Containment', 'Forensics support', 'Timeline reconstruction', 'Root cause']],
+  ['OPS-03', 'Infrastructure', ['Windows Server', 'Linux', 'Active Directory', 'Proxmox VE', 'VMware', 'Backup & DR']],
+  ['OPS-04', 'Automation & IaC', ['Ansible', 'PowerShell', 'Bash', 'Configuration baselines', 'Internal tooling']],
+  ['OPS-05', 'Network Security', ['Firewall design', 'VLAN segmentation', 'VPN', 'DNS / DHCP', 'Zero-trust principles']],
+];
+---
+<BaseLayout>
+  <div class="site-shell">
+    <Sidebar />
+    <main class="content">
+      <section id="overview" class="hero section">
+        <div class="hero__top" data-reveal>
+          <div class="eyebrow">01 / OVERVIEW</div>
+          <div class="availability"><i></i> AVAILABLE · COSTA RICA / UTC−6</div>
+        </div>
+        <div class="hero__body" data-reveal>
+          <div class="hero-signature">
+            <strong class="hero-signature__name">ESTEBAN ROSALES</strong>
+            <span class="hero-signature__role">SECURITY ENGINEER</span>
+          </div>
+          <h1>I turn security signals into <em>operational resilience.</em></h1>
+          <p class="hero__domains">Detection engineering, incident response and infrastructure hardening for production environments where downtime matters.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#operations">EXPLORE OPERATIONS <span>↓</span></a>
+            <a class="button" href={`${base}cv.pdf`} target="_blank">DOWNLOAD CV <span>↗</span></a>
+          </div>
+        </div>
+        <div class="signal-path" aria-hidden="true"><span></span><i></i><span></span><i></i><span></span></div>
+        <div class="proof-strip" data-reveal>
+          <div class="impact__label">SELECTED PROOF / PRODUCTION OUTCOMES</div>
+          <div class="proof-grid">
+            {proofs.map(([value, label, context]) => <div class="proof"><strong>{value}</strong><span>{label}</span><small>{context}</small></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="operations" class="section">
+        <SectionHeader number="02" label="OPERATIONS" title="Core operational domains" />
+        <div class="ops-grid">
+          {operations.map(([code, title, skills], index) => (
+            <article class:list={['ops-card', index === operations.length - 1 && 'ops-card--wide']} data-reveal>
+              <div class="record-code">{code}</div>
+              <h3>{title}</h3>
+              <ul>{skills.map((skill) => <li>{skill}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="cases" class="section cases-section">
+        <SectionHeader number="03" label="CASE FILES" title="Selected engineering outcomes" />
+        <p class="section-intro" data-reveal>Responsibilities are context. Outcomes are evidence. These records focus on the engineering decision and the measurable result.</p>
+
+        <article class="case case--split" data-reveal>
+          <div class="case__meta"><span>CASE-001</span><span>24/7 HEALTHCARE</span></div>
+          <div class="case__grid">
+            <div>
+              <h3>Detection Engineering / Wazuh</h3>
+              <div class="case__block"><span>PROBLEM</span><p>Fragmented visibility across a 24/7 server fleet made security events slow to detect and difficult to prioritize.</p></div>
+              <div class="case__block"><span>INTERVENTION</span><p>Centralized Wazuh telemetry, tuned detections and established a repeatable alert-triage workflow.</p></div>
+            </div>
+            <div class="case-metrics">
+              <div class="outcome"><span>OUTCOME / MTTD</span><strong>DAYS → MINUTES</strong></div>
+              <div class="outcome"><span>OUTCOME / ALERT NOISE</span><strong>−60%</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case" data-reveal>
+          <div class="case__meta"><span>CASE-002</span><span>120 ACCOUNTS</span></div>
+          <h3>Credential Hardening</h3>
+          <div class="credential-chart" aria-label="Crackable credentials reduced from 55 percent to 5.8 percent">
+            <div class="bar-row"><div class="bar-label"><span>BEFORE</span><strong>55%</strong></div><div class="bar-track"><i style="width:55%"></i></div></div>
+            <div class="bar-row"><div class="bar-label"><span>AFTER</span><strong>5.8%</strong></div><div class="bar-track"><i style="width:5.8%"></i></div></div>
+          </div>
+          <div class="process-line"><span>ASSESS</span><i>→</i><span>DEMONSTRATE</span><i>→</i><span>REMEDIATE</span><i>→</i><span>VALIDATE</span></div>
+        </article>
+
+        <article class="case" data-reveal>
+          <div class="case__meta"><span>CASE-003</span><span>ANSIBLE / VMWARE</span></div>
+          <h3>Infrastructure Hardening Automation</h3>
+          <div class="automation-flow">
+            <div class="node"><span>BEFORE</span><strong>Manual per-host configuration</strong></div>
+            <div class="flow-arrow">→</div>
+            <div class="node node--accent"><span>AUTOMATION</span><strong>Ansible baseline</strong></div>
+            <div class="flow-arrow">→</div>
+            <div class="node"><span>RESULT</span><strong>&gt;90% deployment-time reduction</strong></div>
+          </div>
+        </article>
+
+        <article class="case case--malware" data-reveal>
+          <div class="case__meta"><span>CASE-004</span><span>MALWARE RESEARCH / AGENT TESLA</span></div>
+          <div class="case__grid">
+            <div>
+              <h3>Reverse Engineering / Fileless Execution Chain</h3>
+              <div class="case__block"><span>ANALYSIS</span><p>Recovered and traced a staged PowerShell execution chain using Base64, RC4 decryption, in-memory execution, .NET Assembly.Load and Reflection.</p></div>
+              <div class="case__block"><span>EVIDENCE</span><p>Recovered the embedded PE, documented SHA1 indicators, validated the PE structure and analyzed strings consistent with information-stealing behavior.</p></div>
+              <div class="case-links">
+                <a href={`${base}research/agent-tesla-fileless/`}>OPEN TECHNICAL CASE <span>→</span></a>
+                <a href="https://www.linkedin.com/posts/esteban-rosales_an%C3%A1lisis-de-cadena-de-ejecuci%C3%B3n-fileless-activity-7408997182692892673-OQPb?utm_source=share&utm_medium=member_desktop&rcm=ACoAADsu3HgBNhvykLyY0jMv3TNlfI2A-BGnCls" target="_blank" rel="noreferrer">LINKEDIN POST <span>↗</span></a>
+              </div>
+            </div>
+            <div class="malware-chain" aria-label="Agent Tesla staged fileless execution chain">
+              <div><span>01</span><strong>OBFUSCATED SCRIPT</strong><small>Base64 payload</small></div>
+              <i>↓</i>
+              <div><span>02</span><strong>RC4 DECRYPTION</strong><small>PowerShell loader</small></div>
+              <i>↓</i>
+              <div><span>03</span><strong>IN-MEMORY .NET</strong><small>Assembly.Load + Reflection</small></div>
+              <i>↓</i>
+              <div><span>04</span><strong>EMBEDDED PE</strong><small>Infostealer evidence</small></div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="labs" class="section">
+        <SectionHeader number="04" label="LABS" title="Home lab & projects" />
+        {featured && (
+          <a class="featured-project" href={`${base}projects/${featured.id}/`} data-reveal>
+            <div class="featured-project__top"><span>{featured.data.code} / FEATURED</span><span class="availability"><i></i>{featured.data.status}</span></div>
+            <h3>{featured.data.title}</h3>
+            <p class="featured-project__subtitle">{featured.data.subtitle}</p>
+            <p>{featured.data.summary}</p>
+            <div class="module-grid">{featured.data.stack.map((item) => <span>{item}</span>)}</div>
+            <div class="project-system" aria-label="Wild Boar architecture overview">
+              <div><span>01 / COLLECT</span><strong>Security telemetry</strong></div>
+              <i>→</i>
+              <div><span>02 / CORRELATE</span><strong>Detection engine</strong></div>
+              <i>→</i>
+              <div><span>03 / RESPOND</span><strong>Actionable findings</strong></div>
+            </div>
+            <div class="open-link">OPEN PROJECT <span>→</span></div>
+          </a>
+        )}
+        <div class="lab-grid">
+          {secondary.map((project) => (
+            <a class="lab-card" href={`${base}projects/${project.id}/`} data-reveal>
+              <div class="record-code">{project.data.code}</div>
+              <h3>{project.data.title}</h3>
+              <p>{project.data.summary}</p>
+              <div class="tag-row">{project.data.stack.slice(0, 4).map((item) => <span>{item}</span>)}</div>
+              <div class="open-link">PROJECT <span>→</span></div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section id="experience" class="section">
+        <SectionHeader number="05" label="EXPERIENCE" title="Employment records" />
+        <div class="timeline">
+          <article data-reveal>
+            <div class="timeline__dot"></div><div class="record-code">EMPLOYMENT / 002</div>
+            <div class="timeline__date">2023.07 — PRESENT · HEALTHCARE / 24×7</div>
+            <h3>Hospital Clínica Bíblica</h3><p class="role">IT Security & Systems Specialist</p>
+            <p>Security operations · infrastructure · Wazuh SIEM · incident response · hardening · security awareness.</p>
+          </article>
+          <article data-reveal>
+            <div class="timeline__dot"></div><div class="record-code">EMPLOYMENT / 001</div>
+            <div class="timeline__date">2023.01 — 2023.05 · PUBLIC SECTOR</div>
+            <h3>Municipalidad de Carrillo</h3><p class="role">Security Analyst</p>
+            <p>Risk assessment · NIST incident response planning · Ansible hardening · internal penetration testing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="credentials" class="section credentials-section">
+        <SectionHeader number="06" label="CREDENTIALS" title="Credentials & education" />
+        <div class="credentials-grid" data-reveal>
+          <div><h3>CERTIFICATIONS</h3><dl><div><dt>ISC2</dt><dd>Certified in Cybersecurity (CC)</dd></div><div><dt>TryHackMe</dt><dd>Jr Penetration Tester</dd></div><div><dt>Systems Auditing</dt><dd>Detecting Cybersecurity Flaws</dd></div></dl></div>
+          <div><h3>EDUCATION</h3><dl><div><dt>University of Costa Rica</dt><dd>B.S. in Business Informatics · 2019—2022</dd></div><div><dt>English</dt><dd>B2 · Instituto Estelar · 2024—2025</dd></div></dl></div>
+        </div>
+        <footer class="cta" data-reveal>
+          <div class="eyebrow">END OF RECORD</div>
+          <div class="cta__row"><h2>Have a security problem worth solving?</h2><a class="button button--primary" href="mailto:esteban5420978@hotmail.com">CONTACT ESTEBAN <span>→</span></a></div>
+          <div class="footer-meta"><span>ESTEBAN ROSALES / SECURITY ENGINEER</span><span>COSTA RICA / UTC−6</span></div>
+        </footer>
+      </section>
+    </main>
+  </div>
+</BaseLayout>
