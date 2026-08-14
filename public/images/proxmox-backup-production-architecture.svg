@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Proxmox production backup and recovery architecture</title>
+  <desc id="desc">Sanitized architecture showing virtual workloads backed up to a protected Windows NFS repository and restored to Proxmox with recovery validation.</desc>
+  <defs>
+    <style>
+      .bg{fill:#07100d}.panel{fill:#0a1511;stroke:#294238;stroke-width:2}.accent{fill:#10291e;stroke:#72d69b;stroke-width:2}.restore{fill:#1d180d;stroke:#e6ad4c;stroke-width:2}.rule{stroke:#294238;stroke-width:2}.backup{stroke:#72d69b;stroke-width:3;fill:none}.recover{stroke:#e6ad4c;stroke-width:3;fill:none}.muted{fill:#8fa99e}.main{fill:#edf5f1}.green{fill:#72d69b}.amber{fill:#e6ad4c}.label{font:500 18px ui-monospace,monospace;letter-spacing:2px}.title{font:600 28px Arial,sans-serif}.copy{font:400 18px Arial,sans-serif}.small{font:500 15px ui-monospace,monospace;letter-spacing:1px}
+    </style>
+    <marker id="ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0l10 5-10 5z" fill="#72d69b"/></marker>
+    <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0l10 5-10 5z" fill="#e6ad4c"/></marker>
+  </defs>
+  <rect class="bg" width="1600" height="900"/>
+  <text x="80" y="82" class="label green">PROD-002 / BACKUP &amp; RECOVERY</text>
+  <text x="80" y="134" class="title main">Proxmox production data protection</text>
+  <text x="1520" y="82" text-anchor="end" class="small muted">SANITIZED ARCHITECTURE</text>
+  <line x1="80" y1="168" x2="1520" y2="168" class="rule"/>
+
+  <text x="80" y="232" class="label green">BACKUP FLOW</text>
+  <g transform="translate(80 270)"><rect class="panel" width="360" height="210"/><text x="30" y="44" class="label green">SOURCE</text><text x="30" y="96" class="title main">PROXMOX VE</text><text x="30" y="137" class="copy muted">Production virtual machines</text><text x="30" y="176" class="small muted">SCHEDULED VZDUMP</text></g>
+  <path d="M440 375H610" class="backup" marker-end="url(#ga)"/><text x="525" y="350" text-anchor="middle" class="small green">CONTROLLED NFS PATH</text>
+  <g transform="translate(620 270)"><rect class="accent" width="360" height="210"/><text x="30" y="44" class="label green">TRANSPORT</text><text x="30" y="96" class="title main">BACKUP TRANSFER</text><text x="30" y="137" class="copy muted">Identity + mount controls</text><text x="30" y="176" class="small green">RELIABLE DELIVERY</text></g>
+  <path d="M980 375H1150" class="backup" marker-end="url(#ga)"/>
+  <g transform="translate(1160 270)"><rect class="panel" width="360" height="210"/><text x="30" y="44" class="label green">REPOSITORY</text><text x="30" y="96" class="title main">WINDOWS SERVER / NFS</text><text x="30" y="137" class="copy muted">Protected backup storage</text><text x="30" y="176" class="small muted">AVAILABLE RESTORE POINTS</text></g>
+
+  <text x="80" y="570" class="label amber">RESTORE FLOW</text>
+  <g transform="translate(80 608)"><rect class="restore" width="360" height="190"/><text x="30" y="44" class="label amber">01 / SELECT</text><text x="30" y="94" class="title main">RECOVERY POINT</text><text x="30" y="137" class="copy muted">Chosen from Proxmox</text></g>
+  <path d="M440 703H610" class="recover" marker-end="url(#aa)"/>
+  <g transform="translate(620 608)"><rect class="restore" width="360" height="190"/><text x="30" y="44" class="label amber">02 / RESTORE</text><text x="30" y="94" class="title main">VIRTUAL MACHINE</text><text x="30" y="137" class="copy muted">Returned to Proxmox VE</text></g>
+  <path d="M980 703H1150" class="recover" marker-end="url(#aa)"/>
+  <g transform="translate(1160 608)"><rect class="restore" width="360" height="190"/><text x="30" y="44" class="label amber">03 / VERIFY</text><text x="30" y="94" class="title main">RECOVERY VALIDATION</text><text x="30" y="137" class="copy muted">Boot + service availability</text></g>
+  <text x="80" y="852" class="small muted">TOPOLOGY SIMPLIFIED / IDENTIFIERS, CAPACITY, SCHEDULES AND CONFIGURATION OMITTED</text>
+</svg>

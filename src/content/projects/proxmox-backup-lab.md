@@ -6,13 +6,14 @@ subtitle: Production Virtualization / Backup & Recovery
 status: IN PRODUCTION
 featured: false
 stack: [Proxmox VE, Windows Server, NFS, vzdump]
-summary: Production backup infrastructure connecting Proxmox VE workloads to a protected Windows Server NFS repository, engineered for reliable operation and recoverability.
-architectureImage: /images/proxmox-backup-production-architecture.png
+summary: I built this production backup path to store Proxmox VM backups on a Windows Server NFS repository and make restores easy to verify.
+architectureImage: /images/proxmox-backup-production-architecture.svg
+architectureMobileImage: /images/proxmox-backup-production-architecture-mobile.svg
 architectureCaption: SANITIZED PRODUCTION VIEW / SENSITIVE CONFIGURATION OMITTED
 ---
 
-This production implementation provides a controlled backup path for virtual workloads and addresses the operational conditions that appear beyond initial setup: identity mapping, mount recovery, transfer reliability and recovery verification.
+I built and maintain this backup setup for virtual machines running in production. The work went beyond mounting an NFS share: I had to account for identity mapping, failed mounts, transfer reliability and restore testing.
 
-Recovery is initiated from Proxmox by selecting an available backup stored in the Windows Server NFS repository. The virtual machine is restored in Proxmox and then validated for successful boot and expected service availability.
+For a recovery, I select an available backup from Proxmox, restore the virtual machine and check that it boots and provides the expected services.
 
-The architecture shown here is intentionally simplified. Host identifiers, network topology, storage paths, capacity, schedules, retention policies and configuration values are omitted to protect the organization.
+The diagram is intentionally simplified. I left out hostnames, network details, storage paths, capacity, schedules, retention settings and configuration values to protect the organization.

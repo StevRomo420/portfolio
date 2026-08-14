@@ -37,8 +37,8 @@ const operations = [
             <strong class="hero-signature__name">ESTEBAN ROSALES</strong>
             <span class="hero-signature__role">SECURITY ENGINEER</span>
           </div>
-          <h1>I turn security signals into <em>operational resilience.</em></h1>
-          <p class="hero__domains">Detection engineering, incident response and infrastructure hardening for production environments where downtime matters.</p>
+          <h1>I build security systems that <em>hold up in production.</em></h1>
+          <p class="hero__domains">My work covers detection engineering, incident response and infrastructure hardening for environments where downtime has a real cost.</p>
           <div class="hero__actions">
             <a class="button button--primary" href="#operations">EXPLORE OPERATIONS <span>↓</span></a>
             <a class="button" href={`${base}cv.pdf`} target="_blank">DOWNLOAD CV <span>↗</span></a>
@@ -68,15 +68,15 @@ const operations = [
 
       <section id="cases" class="section cases-section">
         <SectionHeader number="03" label="CASE FILES" title="Selected engineering outcomes" />
-        <p class="section-intro" data-reveal>Responsibilities are context. Outcomes are evidence. These records focus on the engineering decision and the measurable result.</p>
+        <p class="section-intro" data-reveal>These cases show the problem I faced, what I changed and the result I was able to measure.</p>
 
         <article class="case case--split" data-reveal>
           <div class="case__meta"><span>CASE-001</span><span>24/7 HEALTHCARE</span></div>
           <div class="case__grid">
             <div>
               <h3>Detection Engineering / Wazuh</h3>
-              <div class="case__block"><span>PROBLEM</span><p>Fragmented visibility across a 24/7 server fleet made security events slow to detect and difficult to prioritize.</p></div>
-              <div class="case__block"><span>INTERVENTION</span><p>Centralized Wazuh telemetry, tuned detections and established a repeatable alert-triage workflow.</p></div>
+              <div class="case__block"><span>PROBLEM</span><p>A 24/7 server environment had fragmented logging, which made security events slow to find and hard to prioritize.</p></div>
+              <div class="case__block"><span>INTERVENTION</span><p>I centralized the telemetry in Wazuh, tuned noisy detections and defined a consistent process for reviewing alerts.</p></div>
             </div>
             <div class="case-metrics">
               <div class="outcome"><span>OUTCOME / MTTD</span><strong>DAYS → MINUTES</strong></div>
@@ -98,12 +98,14 @@ const operations = [
         <article class="case" data-reveal>
           <div class="case__meta"><span>CASE-003</span><span>ANSIBLE / VMWARE</span></div>
           <h3>Infrastructure Hardening Automation</h3>
-          <div class="automation-flow">
-            <div class="node"><span>BEFORE</span><strong>Manual per-host configuration</strong></div>
+          <div class="automation-flow automation-flow--loop">
+            <div class="node"><span>01 / MANUAL STATE</span><strong>Per-host configuration</strong><small>Variable starting point</small></div>
             <div class="flow-arrow">→</div>
-            <div class="node node--accent"><span>AUTOMATION</span><strong>Ansible baseline</strong></div>
+            <div class="node node--accent"><span>02 / APPLY BASELINE</span><strong>Ansible automation</strong><small>Repeatable security state</small></div>
             <div class="flow-arrow">→</div>
-            <div class="node"><span>RESULT</span><strong>&gt;90% deployment-time reduction</strong></div>
+            <div class="node"><span>03 / VERIFY</span><strong>Measure compliance</strong><small>Surface configuration drift</small></div>
+            <div class="flow-arrow">→</div>
+            <div class="node"><span>04 / REMEDIATE</span><strong>Converge and repeat</strong><small>&gt;90% faster deployment</small></div>
           </div>
         </article>
 
@@ -112,21 +114,20 @@ const operations = [
           <div class="case__grid">
             <div>
               <h3>Reverse Engineering / Fileless Execution Chain</h3>
-              <div class="case__block"><span>ANALYSIS</span><p>Recovered and traced a staged PowerShell execution chain using Base64, RC4 decryption, in-memory execution, .NET Assembly.Load and Reflection.</p></div>
-              <div class="case__block"><span>EVIDENCE</span><p>Recovered the embedded PE, documented SHA1 indicators, validated the PE structure and analyzed strings consistent with information-stealing behavior.</p></div>
+              <div class="case__block"><span>ANALYSIS</span><p>I traced a staged PowerShell chain through Base64 decoding, RC4 decryption, in-memory execution, Assembly.Load and Reflection.</p></div>
+              <div class="case__block"><span>EVIDENCE</span><p>I recovered the embedded PE, recorded its SHA1 indicators, checked the file structure and reviewed strings associated with credential theft.</p></div>
               <div class="case-links">
                 <a href={`${base}research/agent-tesla-fileless/`}>OPEN TECHNICAL CASE <span>→</span></a>
                 <a href="https://www.linkedin.com/posts/esteban-rosales_an%C3%A1lisis-de-cadena-de-ejecuci%C3%B3n-fileless-activity-7408997182692892673-OQPb?utm_source=share&utm_medium=member_desktop&rcm=ACoAADsu3HgBNhvykLyY0jMv3TNlfI2A-BGnCls" target="_blank" rel="noreferrer">LINKEDIN POST <span>↗</span></a>
               </div>
             </div>
-            <div class="malware-chain" aria-label="Agent Tesla staged fileless execution chain">
-              <div><span>01</span><strong>OBFUSCATED SCRIPT</strong><small>Base64 payload</small></div>
-              <i>↓</i>
-              <div><span>02</span><strong>RC4 DECRYPTION</strong><small>PowerShell loader</small></div>
-              <i>↓</i>
-              <div><span>03</span><strong>IN-MEMORY .NET</strong><small>Assembly.Load + Reflection</small></div>
-              <i>↓</i>
-              <div><span>04</span><strong>EMBEDDED PE</strong><small>Infostealer evidence</small></div>
+            <div class="malware-invite" aria-label="Preview of the Agent Tesla technical analysis">
+              <div class="malware-invite__title">ANALYSIS PATH</div>
+              <div class="malware-invite__steps">
+                <div><span>01 / INPUT</span><strong>Obfuscated PowerShell</strong></div>
+                <div><span>02 / TRACE</span><strong>Decode and inspect</strong></div>
+                <div><span>03 / EVIDENCE</span><strong>Recovered PE</strong></div>
+              </div>
             </div>
           </div>
         </article>
@@ -188,7 +189,7 @@ const operations = [
         </div>
         <footer class="cta" data-reveal>
           <div class="eyebrow">END OF RECORD</div>
-          <div class="cta__row"><h2>Have a security problem worth solving?</h2><a class="button button--primary" href="mailto:esteban5420978@hotmail.com">CONTACT ESTEBAN <span>→</span></a></div>
+          <div class="cta__row"><h2>Need help with a security or infrastructure problem?</h2><a class="button button--primary" href="mailto:esteban5420978@hotmail.com">CONTACT ESTEBAN <span>→</span></a></div>
           <div class="footer-meta"><span>ESTEBAN ROSALES / SECURITY ENGINEER</span><span>COSTA RICA / UTC−6</span></div>
         </footer>
       </section>

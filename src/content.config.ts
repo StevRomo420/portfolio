@@ -15,7 +15,11 @@ const projects = defineCollection({
     summary: z.string(),
     outcome: z.string().optional(),
     architectureImage: z.string().optional(),
+    architectureMobileImage: z.string().optional(),
     architectureCaption: z.string().optional(),
+    secondaryArchitectureImage: z.string().optional(),
+    secondaryArchitectureMobileImage: z.string().optional(),
+    secondaryArchitectureCaption: z.string().optional(),
   }),
 });
 

@@ -6,7 +6,10 @@ subtitle: Detection Engineering
 status: ACTIVE LAB
 featured: false
 stack: [Wazuh, Rules, Decoders, Simulated Traffic]
-summary: Custom Wazuh rules and decoders validated against simulated attack traffic before production rollout.
+summary: I use this lab to test Wazuh decoders and rules against simulated activity before considering them for production.
+architectureImage: /images/wazuh-detection-lifecycle.svg
+architectureMobileImage: /images/wazuh-detection-lifecycle-mobile.svg
+architectureCaption: DETECTION LIFECYCLE / CONTROLLED VALIDATION BEFORE PROMOTION
 ---
 
-The lab provides a safer path for developing detections: generate controlled telemetry, inspect parsing, tune rules, validate noise and only then promote to production.
+My workflow starts by generating known telemetry and checking how Wazuh parses it. I then tune the rule, test expected matches and false positives, and document the result before deciding whether it is ready for production.

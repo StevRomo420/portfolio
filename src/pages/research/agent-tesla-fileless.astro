@@ -9,7 +9,7 @@ const iocs = [
   ['Binary', '2e6a3a9ab81ecf480411ee70396fc361c1931654'],
 ];
 ---
-<BaseLayout title="Agent Tesla Fileless Execution Analysis — Esteban Rosales" description="Reverse engineering case study tracing a staged Agent Tesla fileless execution chain through PowerShell, RC4 and in-memory .NET loading.">
+<BaseLayout title="Agent Tesla Fileless Execution Analysis — Esteban Rosales" description="Technical analysis of an Agent Tesla loader using PowerShell, RC4 decryption and in-memory .NET loading.">
   <main class="research-page">
     <a class="project-back" href={`${base}#cases`}><span>← CASE FILES</span><strong class="identity-name">ESTEBAN ROSALES</strong></a>
     <article class="research-record" data-reveal>
@@ -18,10 +18,18 @@ const iocs = [
         <div class="research-hero__meta">
           <span>2025.12.22</span><span>REVERSE ENGINEERING</span><span>AGENT TESLA</span>
         </div>
-        <h1>Tracing a staged fileless execution chain from obfuscated PowerShell to an in-memory .NET payload.</h1>
-        <p>The analysis follows a multi-stage loader that decodes Base64 content, decrypts it with RC4, executes PowerShell dynamically in memory and loads an embedded PE through the .NET runtime.</p>
+        <h1>How I traced an obfuscated PowerShell chain to an in-memory .NET payload.</h1>
+        <p>I worked through the loader one stage at a time: decoding the Base64 content, recovering the RC4-encrypted script and tracing how it loaded an embedded PE through the .NET runtime.</p>
         <a class="button button--primary" href={linkedInUrl} target="_blank" rel="noreferrer">VIEW ORIGINAL LINKEDIN POST <span>↗</span></a>
       </header>
+
+      <figure class="project-architecture malware-architecture">
+        <picture>
+          <source media="(max-width: 620px)" srcset={`${base}images/agent-tesla-execution-analysis-mobile.svg`} />
+          <img src={`${base}images/agent-tesla-execution-analysis.svg`} alt="Sanitized Agent Tesla staged execution analysis from obfuscated script to static evidence" loading="eager" />
+        </picture>
+        <figcaption>EXECUTION ANALYSIS / CONDENSED STATIC-RESEARCH VIEW</figcaption>
+      </figure>
 
       <section class="research-section">
         <div class="eyebrow">EXECUTION CHAIN</div>
@@ -50,8 +58,8 @@ const iocs = [
         <aside class="research-evidence">
           <div class="eyebrow">STATIC EVIDENCE</div>
           <strong>PE32 / .NET</strong>
-          <p>Recovered binary showed the expected MZ and PE signatures and was identified as a Windows PE32 Mono/.NET assembly.</p>
-          <p>String inspection exposed references to browsers, email clients, profile locations and password-related data consistent with information-stealing functionality.</p>
+          <p>The recovered file contained valid MZ and PE signatures and was identified as a Windows PE32 Mono/.NET assembly.</p>
+          <p>Its strings referenced browsers, email clients, profile paths and password-related data, which supported the assessment that it was built to steal information.</p>
         </aside>
       </section>
 
@@ -64,7 +72,7 @@ const iocs = [
 
       <section class="research-section research-note">
         <div class="eyebrow">PORTFOLIO NOTE</div>
-        <p>This case study is a condensed presentation of the original malware-analysis report. It emphasizes investigative methodology, execution-chain reconstruction and defensible evidence rather than reproducing every payload detail.</p>
+        <p>This page is a shortened version of my original analysis. I kept the steps needed to explain the execution chain and the evidence behind the findings, while leaving out unnecessary payload detail.</p>
       </section>
     </article>
   </main>

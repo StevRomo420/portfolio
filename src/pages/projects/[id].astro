@@ -27,8 +27,20 @@ const base = import.meta.env.BASE_URL;
       <div class="tag-row">{project.data.stack.map((item) => <span>{item}</span>)}</div>
       {project.data.architectureImage && (
         <figure class="project-architecture">
-          <img src={`${base}${project.data.architectureImage.replace(/^\//, '')}`} alt={`Sanitized production architecture for ${project.data.title}`} loading="eager" />
+          <picture>
+            {project.data.architectureMobileImage && <source media="(max-width: 620px)" srcset={`${base}${project.data.architectureMobileImage.replace(/^\//, '')}`} />}
+            <img src={`${base}${project.data.architectureImage.replace(/^\//, '')}`} alt={`Sanitized production architecture for ${project.data.title}`} loading="eager" />
+          </picture>
           {project.data.architectureCaption && <figcaption>{project.data.architectureCaption}</figcaption>}
+        </figure>
+      )}
+      {project.data.secondaryArchitectureImage && (
+        <figure class="project-architecture project-architecture--secondary">
+          <picture>
+            {project.data.secondaryArchitectureMobileImage && <source media="(max-width: 620px)" srcset={`${base}${project.data.secondaryArchitectureMobileImage.replace(/^\//, '')}`} />}
+            <img src={`${base}${project.data.secondaryArchitectureImage.replace(/^\//, '')}`} alt={`Technical workflow for ${project.data.title}`} loading="lazy" />
+          </picture>
+          {project.data.secondaryArchitectureCaption && <figcaption>{project.data.secondaryArchitectureCaption}</figcaption>}
         </figure>
       )}
       <div class="project-prose"><Content /></div>

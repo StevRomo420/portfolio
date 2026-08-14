@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Tesla staged execution analysis</title>
+  <desc id="desc">Sanitized diagram showing an obfuscated script, RC4 decryption, in-memory .NET loading, recovered payload and static analysis evidence.</desc>
+  <defs>
+    <style>
+      .bg{fill:#07100d}.panel{fill:#0a1511;stroke:#294238;stroke-width:2}.accent{fill:#10291e;stroke:#72d69b;stroke-width:2}.rule{stroke:#294238;stroke-width:2}.flow{stroke:#72d69b;stroke-width:3;fill:none}.muted{fill:#8fa99e}.main{fill:#edf5f1}.green{fill:#72d69b}.amber{fill:#e6ad4c}.label{font:500 18px ui-monospace,monospace;letter-spacing:2px}.title{font:600 29px Arial,sans-serif}.copy{font:400 18px Arial,sans-serif}.small{font:500 15px ui-monospace,monospace;letter-spacing:1px}
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0l10 5-10 5z" fill="#72d69b"/></marker>
+  </defs>
+  <rect class="bg" width="1600" height="900"/>
+  <text x="80" y="82" class="label green">CASE-004 / EXECUTION ANALYSIS</text>
+  <text x="80" y="134" class="title main">Staged fileless execution chain</text>
+  <text x="1520" y="82" text-anchor="end" class="small muted">SANITIZED TECHNICAL VIEW</text>
+  <line x1="80" y1="168" x2="1520" y2="168" class="rule"/>
+
+  <g transform="translate(80 245)">
+    <rect class="panel" width="300" height="250"/>
+    <text x="28" y="42" class="label green">01 / ENTRY</text>
+    <text x="28" y="82" class="title main"><tspan x="28">OBFUSCATED</tspan><tspan x="28" dy="34">SCRIPT</tspan></text>
+    <line x1="28" y1="130" x2="272" y2="130" class="rule"/>
+    <text x="28" y="167" class="copy muted">Embedded Base64 content</text>
+    <text x="28" y="198" class="copy muted">and cleanup behavior</text>
+    <text x="28" y="224" class="small amber">STATIC HANDLING</text>
+  </g>
+  <path d="M380 370H450" class="flow" marker-end="url(#arrow)"/>
+  <g transform="translate(460 245)">
+    <rect class="accent" width="300" height="250"/>
+    <text x="28" y="42" class="label green">02 / DECODE</text>
+    <text x="28" y="92" class="title main" style="font-size:27px">RC4 DECRYPTION</text>
+    <line x1="28" y1="116" x2="272" y2="116" class="rule"/>
+    <text x="28" y="157" class="copy muted">Base64 decode followed</text>
+    <text x="28" y="190" class="copy muted">by RC4 recovery</text>
+    <text x="28" y="224" class="small green">NEXT STAGE EXPOSED</text>
+  </g>
+  <path d="M760 370H830" class="flow" marker-end="url(#arrow)"/>
+  <g transform="translate(840 245)">
+    <rect class="panel" width="300" height="250"/>
+    <text x="28" y="42" class="label green">03 / LOAD</text>
+    <text x="28" y="92" class="title main">IN-MEMORY .NET</text>
+    <line x1="28" y1="116" x2="272" y2="116" class="rule"/>
+    <text x="28" y="157" class="copy muted">PowerShell + Assembly.Load</text>
+    <text x="28" y="190" class="copy muted">Reflection invocation</text>
+    <text x="28" y="224" class="small amber">NO FINAL EXECUTION</text>
+  </g>
+  <path d="M1140 370H1210" class="flow" marker-end="url(#arrow)"/>
+  <g transform="translate(1220 245)">
+    <rect class="panel" width="300" height="250"/>
+    <text x="28" y="42" class="label green">04 / RECOVER</text>
+    <text x="28" y="92" class="title main">EMBEDDED PE</text>
+    <line x1="28" y1="116" x2="272" y2="116" class="rule"/>
+    <text x="28" y="157" class="copy muted">PE32 / .NET assembly</text>
+    <text x="28" y="190" class="copy muted">recovered for inspection</text>
+    <text x="28" y="224" class="small green">EVIDENCE PRESERVED</text>
+  </g>
+
+  <rect x="80" y="590" width="1440" height="190" class="panel"/>
+  <text x="112" y="638" class="label green">STATIC ANALYSIS / DEFENSIBLE EVIDENCE</text>
+  <line x1="112" y1="664" x2="1488" y2="664" class="rule"/>
+  <text x="112" y="714" class="title main">Structure</text><text x="112" y="748" class="copy muted">MZ + PE signatures validated</text>
+  <text x="560" y="714" class="title main">Indicators</text><text x="560" y="748" class="copy muted">SHA1 values documented</text>
+  <text x="1008" y="714" class="title main">Behavior</text><text x="1008" y="748" class="copy muted">Strings consistent with credential theft</text>
+  <text x="80" y="842" class="small muted">CONDENSED PORTFOLIO VIEW / MALICIOUS PAYLOAD NOT EXECUTED</text>
+</svg>

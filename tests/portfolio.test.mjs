@@ -93,12 +93,63 @@ test('the GitHub Pages base path ends with a slash before public assets', async 
 test('the Proxmox project is classified as sanitized production infrastructure', async () => {
   const project = await read('src/content/projects/proxmox-backup-lab.md');
   const template = await read('src/pages/projects/[id].astro');
+  const diagram = await read('public/images/proxmox-backup-production-architecture.svg');
 
   assert.match(project, /code: PROD-002/);
   assert.match(project, /title: Proxmox Backup Infrastructure/);
   assert.match(project, /status: IN PRODUCTION/);
-  assert.match(project, /architectureImage: \/images\/proxmox-backup-production-architecture\.png/);
+  assert.match(project, /architectureImage: \/images\/proxmox-backup-production-architecture\.svg/);
+  assert.match(project, /architectureMobileImage: \/images\/proxmox-backup-production-architecture-mobile\.svg/);
   assert.match(template, /class="project-architecture"/);
+  assert.match(template, /<picture>/);
+  assert.match(diagram, /BACKUP FLOW/);
+  assert.match(diagram, /RESTORE FLOW/);
+  assert.match(diagram, /RECOVERY VALIDATION/);
+});
+
+test('the malware case renders a restrained technical execution diagram', async () => {
+  const page = await read('src/pages/research/agent-tesla-fileless.astro');
+  const homepage = await read('src/pages/index.astro');
+  const diagram = await read('public/images/agent-tesla-execution-analysis.svg');
+
+  assert.match(page, /agent-tesla-execution-analysis\.svg/);
+  assert.match(page, /agent-tesla-execution-analysis-mobile\.svg/);
+  assert.match(page, /class="project-architecture malware-architecture"/);
+  assert.match(diagram, /OBFUSCATED[\s\S]*SCRIPT/);
+  assert.match(diagram, /RC4 DECRYPTION/);
+  assert.match(diagram, /IN-MEMORY \.NET/);
+  assert.match(diagram, /STATIC ANALYSIS/);
+  assert.match(homepage, /class="malware-invite"/);
+  assert.match(homepage, /class="malware-invite__steps"/);
+  assert.match(homepage, /INPUT[\s\S]*TRACE[\s\S]*EVIDENCE/);
+  assert.doesNotMatch(homepage, /EXPLORE THE FULL EXECUTION CHAIN/);
+  assert.doesNotMatch(homepage, /class="malware-chain"/);
+});
+
+test('Wazuh and the mixed-infrastructure IR program include responsive technical diagrams', async () => {
+  const wazuh = await read('src/content/projects/wazuh-detection-lab.md');
+  const windowsIr = await read('src/content/projects/windows-ir-toolkit.md');
+  const wazuhDiagram = await read('public/images/wazuh-detection-lifecycle.svg');
+  const irPlan = await read('public/images/nist-aligned-incident-response-plan.svg');
+  const irWorkflow = await read('public/images/incident-response-triage-workflow.svg');
+
+  assert.match(wazuh, /architectureImage: \/images\/wazuh-detection-lifecycle\.svg/);
+  assert.match(wazuh, /architectureMobileImage: \/images\/wazuh-detection-lifecycle-mobile\.svg/);
+  assert.match(windowsIr, /title: Incident Response Program/);
+  assert.match(windowsIr, /NIST-Aligned \/ Windows & Linux Infrastructure/);
+  assert.match(windowsIr, /architectureImage: \/images\/nist-aligned-incident-response-plan\.svg/);
+  assert.match(windowsIr, /architectureMobileImage: \/images\/nist-aligned-incident-response-plan-mobile\.svg/);
+  assert.match(windowsIr, /secondaryArchitectureImage: \/images\/incident-response-triage-workflow\.svg/);
+  assert.match(windowsIr, /secondaryArchitectureMobileImage: \/images\/incident-response-triage-workflow-mobile\.svg/);
+  assert.match(wazuhDiagram, /TELEMETRY[\s\S]*PARSE[\s\S]*DETECT[\s\S]*VALIDATE[\s\S]*PROMOTE/);
+  assert.match(irPlan, /PREPARE[\s\S]*DETECT[\s\S]*RESPOND[\s\S]*RECOVER[\s\S]*IMPROVE/);
+  assert.match(irWorkflow, /WINDOWS[\s\S]*LINUX[\s\S]*ACQUIRE[\s\S]*TRIAGE[\s\S]*CORRELATE[\s\S]*CONTAIN/);
+});
+
+test('the Ansible case communicates a complete hardening feedback loop', async () => {
+  const homepage = await read('src/pages/index.astro');
+
+  assert.match(homepage, /MANUAL STATE[\s\S]*APPLY BASELINE[\s\S]*VERIFY[\s\S]*REMEDIATE/);
 });
 
 test('the featured Wild Boar card teases the system without rendering the full diagram', async () => {
@@ -110,4 +161,18 @@ test('the featured Wild Boar card teases the system without rendering the full d
   assert.match(homepage, /SECURITY WORK[\s\S]*GOVERN · OPERATE · EVIDENCE/);
   assert.doesNotMatch(homepage, /featured\.data\.architectureImage/);
   assert.doesNotMatch(homepage, /01 \/ COLLECT[\s\S]*02 \/ CORRELATE[\s\S]*03 \/ RESPOND/);
+});
+
+test('portfolio copy uses direct practitioner language instead of generic marketing prose', async () => {
+  const source = (await Promise.all([
+    read('src/pages/index.astro'),
+    read('src/pages/research/agent-tesla-fileless.astro'),
+    read('src/content/projects/proxmox-backup-lab.md'),
+    read('src/content/projects/wazuh-detection-lab.md'),
+    read('src/content/projects/wild-boar.md'),
+    read('src/content/projects/windows-ir-toolkit.md'),
+  ])).join('\n');
+
+  assert.match(source, /I built|I developed|I use this lab/);
+  assert.doesNotMatch(source, /one governed workspace|defensible evidence|provides a controlled backup path|evidence-led technical workflow/);
 });
