@@ -90,6 +90,13 @@ test('the GitHub Pages base path ends with a slash before public assets', async 
   assert.doesNotMatch(config, /`\/\$\{repo\}`/);
 });
 
+test('GitHub Pages builds with the verified Node LTS runtime', async () => {
+  const workflow = await read('.github/workflows/deploy.yml');
+
+  assert.match(workflow, /node-version: 22/);
+  assert.doesNotMatch(workflow, /node-version: 24/);
+});
+
 test('the Proxmox project is classified as sanitized production infrastructure', async () => {
   const project = await read('src/content/projects/proxmox-backup-lab.md');
   const template = await read('src/pages/projects/[id].astro');
@@ -175,4 +182,44 @@ test('portfolio copy uses direct practitioner language instead of generic market
 
   assert.match(source, /I built|I developed|I use this lab/);
   assert.doesNotMatch(source, /one governed workspace|defensible evidence|provides a controlled backup path|evidence-led technical workflow/);
+});
+
+test('risk assurance and infrastructure assessment experience are published as sanitized projects', async () => {
+  const risk = await read('src/content/projects/cyber-risk-assurance.md');
+  const assessment = await read('src/content/projects/infrastructure-security-assessments.md');
+  const homepage = await read('src/pages/index.astro');
+
+  assert.match(risk, /title: Cyber Risk & Security Assurance/);
+  assert.match(risk, /architectureImage: \/images\/cyber-risk-assurance-lifecycle\.svg/);
+  assert.match(risk, /architectureMobileImage: \/images\/cyber-risk-assurance-lifecycle-mobile\.svg/);
+  assert.match(assessment, /title: Infrastructure Security Assessments/);
+  assert.match(assessment, /architectureImage: \/images\/infrastructure-security-assessment-workflow\.svg/);
+  assert.match(assessment, /architectureMobileImage: \/images\/infrastructure-security-assessment-workflow-mobile\.svg/);
+  assert.match(homepage, /Security Assurance/);
+  assert.match(homepage, /risk assessment/i);
+  assert.match(homepage, /security awareness/i);
+});
+
+test('new professional cases use first-person ownership without exposing internal identifiers', async () => {
+  const source = (await Promise.all([
+    read('src/content/projects/cyber-risk-assurance.md'),
+    read('src/content/projects/infrastructure-security-assessments.md'),
+  ])).join('\n');
+
+  assert.match(source, /I designed|I carried out|I developed/);
+  assert.doesNotMatch(source, /HCSRA|Cl[ií]nica B[ií]blica|hostname|IP address|account name/i);
+});
+
+test('new assurance diagrams communicate short readable workflows', async () => {
+  const risk = await read('public/images/cyber-risk-assurance-lifecycle.svg');
+  const riskMobile = await read('public/images/cyber-risk-assurance-lifecycle-mobile.svg');
+  const assessment = await read('public/images/infrastructure-security-assessment-workflow.svg');
+  const assessmentMobile = await read('public/images/infrastructure-security-assessment-workflow-mobile.svg');
+
+  assert.match(risk, /IDENTIFY[\s\S]*ASSESS[\s\S]*PRIORITIZE[\s\S]*TREAT[\s\S]*FOLLOW UP/);
+  assert.match(assessment, /SCOPE[\s\S]*ASSESS[\s\S]*VALIDATE[\s\S]*REPORT[\s\S]*IMPROVE/);
+  for (const diagram of [risk, riskMobile, assessment, assessmentMobile]) {
+    assert.match(diagram, /viewBox=/);
+    assert.doesNotMatch(diagram, /HCSRA|Cl[ií]nica B[ií]blica|\b(?:\d{1,3}\.){3}\d{1,3}\b/i);
+  }
 });

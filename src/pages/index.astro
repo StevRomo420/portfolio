@@ -21,6 +21,7 @@ const operations = [
   ['OPS-03', 'Infrastructure', ['Windows Server', 'Linux', 'Active Directory', 'Proxmox VE', 'VMware', 'Backup & DR']],
   ['OPS-04', 'Automation & IaC', ['Ansible', 'PowerShell', 'Bash', 'Configuration baselines', 'Internal tooling']],
   ['OPS-05', 'Network Security', ['Firewall design', 'VLAN segmentation', 'VPN', 'DNS / DHCP', 'Zero-trust principles']],
+  ['OPS-06', 'Security Assurance', ['Risk assessment', 'IT audit', 'Control reviews', 'Remediation tracking', 'Security awareness']],
 ];
 ---
 <BaseLayout>
@@ -57,7 +58,7 @@ const operations = [
         <SectionHeader number="02" label="OPERATIONS" title="Core operational domains" />
         <div class="ops-grid">
           {operations.map(([code, title, skills], index) => (
-            <article class:list={['ops-card', index === operations.length - 1 && 'ops-card--wide']} data-reveal>
+            <article class:list={['ops-card', index === operations.length - 1 && operations.length % 2 !== 0 && 'ops-card--wide']} data-reveal>
               <div class="record-code">{code}</div>
               <h3>{title}</h3>
               <ul>{skills.map((skill) => <li>{skill}</li>)}</ul>
@@ -170,7 +171,7 @@ const operations = [
             <div class="timeline__dot"></div><div class="record-code">EMPLOYMENT / 002</div>
             <div class="timeline__date">2023.07 — PRESENT · HEALTHCARE / 24×7</div>
             <h3>Hospital Clínica Bíblica</h3><p class="role">IT Security & Systems Specialist</p>
-            <p>Security operations · infrastructure · Wazuh SIEM · incident response · hardening · security awareness.</p>
+            <p>Security operations · infrastructure · Wazuh SIEM · incident response · risk assessment · technical security reviews · security awareness.</p>
           </article>
           <article data-reveal>
             <div class="timeline__dot"></div><div class="record-code">EMPLOYMENT / 001</div>
