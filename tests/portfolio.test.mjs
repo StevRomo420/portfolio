@@ -110,11 +110,13 @@ test('the homepage presents the owner name as a prominent signature', async () =
   assert.match(styles, /@media \(max-width: 820px\)[\s\S]*\.hero-signature__name[^}]*font-size: 18px/);
 });
 
-test('the GitHub Pages base path ends with a slash before public assets', async () => {
+test('the custom domain serves public assets from the site root', async () => {
   const config = await read('astro.config.mjs');
+  const cname = await read('public/CNAME');
 
-  assert.match(config, /`\/\$\{repo\}\/`/);
-  assert.doesNotMatch(config, /`\/\$\{repo\}`/);
+  assert.match(config, /site: 'https:\/\/erosales\.cybershieldrs\.com'/);
+  assert.match(config, /base: '\/'/);
+  assert.equal(cname.trim(), 'erosales.cybershieldrs.com');
 });
 
 test('GitHub Pages builds with the verified Node LTS runtime', async () => {
